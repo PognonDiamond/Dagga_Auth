@@ -44,3 +44,34 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
+
+apply plugin: 'maven-publish'
+
+/*task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}*/
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId 'com.github.pognondiamond'
+                artifactId 'mylibrary'
+                version '1.0'
+                //artifact(sourceJar)
+                //artifact("$buildDir/outputs/aar/mylibrary-release.aar")
+            }
+        }
+        /*repositories {
+            maven {
+                name = 'myrepo'
+                url = "${project.buildDir}/repo"
+                //url "$buildDir/repo"
+                //url 'https://dl.bintray.com/pognonhenritoze@gmailcom/maven'
+            }
+        }*/
+    }
+
+}
